@@ -26,7 +26,7 @@ extension MayrContextScaffoldMessengerExtensions on BuildContext {
   }) => scaffoldMessenger.showSnackBar(
     SnackBar(
       content: Text(content),
-      duration: duration ?? 4.seconds,
+      duration: duration ?? const Duration(seconds: 4),
       behavior: behavior,
     ),
   );
