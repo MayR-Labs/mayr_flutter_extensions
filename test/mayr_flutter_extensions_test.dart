@@ -26,7 +26,10 @@ void main() {
       final paddedWidget = testWidget.paddingAll(16);
 
       expect(paddedWidget, isA<Padding>());
-      expect((paddedWidget as Padding).padding, equals(const EdgeInsets.all(16)));
+      expect(
+        (paddedWidget as Padding).padding,
+        equals(const EdgeInsets.all(16)),
+      );
     });
 
     testWidgets('opacity wraps widget in Opacity', (tester) async {
@@ -34,7 +37,7 @@ void main() {
       final opacityWidget = testWidget.opacity(0.5);
 
       expect(opacityWidget, isA<Opacity>());
-      expect((opacityWidget as Opacity).opacity, equals(0.5));
+      expect((opacityWidget).opacity, equals(0.5));
     });
 
     testWidgets('showIf shows widget when condition is true', (tester) async {
@@ -126,9 +129,10 @@ void main() {
   group('InkWellManager', () {
     testWidgets('onTap creates InkWell with tap callback', (tester) async {
       bool tapped = false;
-      final widget = const Text('Test').inkWellManager(() {
-        tapped = true;
-      }).onTap();
+      final widget =
+          const Text('Test').inkWellManager(() {
+            tapped = true;
+          }).onTap();
 
       expect(widget, isA<InkWell>());
 
@@ -138,11 +142,14 @@ void main() {
       expect(tapped, isTrue);
     });
 
-    testWidgets('onLongPress creates InkWell with long press callback', (tester) async {
+    testWidgets('onLongPress creates InkWell with long press callback', (
+      tester,
+    ) async {
       bool longPressed = false;
-      final widget = const Text('Test').inkWellManager(() {
-        longPressed = true;
-      }).onLongPress();
+      final widget =
+          const Text('Test').inkWellManager(() {
+            longPressed = true;
+          }).onLongPress();
 
       expect(widget, isA<InkWell>());
 

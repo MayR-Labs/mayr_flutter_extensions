@@ -62,14 +62,8 @@ class ExampleScreen extends StatelessWidget {
             // Expanded example
             Row(
               children: [
-                Container(
-                  height: 50,
-                  color: Colors.red,
-                ).expanded(2),
-                Container(
-                  height: 50,
-                  color: Colors.green,
-                ).expanded(1),
+                Container(height: 50, color: Colors.red).expanded(2),
+                Container(height: 50, color: Colors.green).expanded(1),
               ],
             ),
 
@@ -85,10 +79,7 @@ class ExampleScreen extends StatelessWidget {
             Container(
               padding: const EdgeInsets.all(16),
               color: Colors.amber,
-              child: const Text(
-                'Tap Me',
-                style: TextStyle(fontSize: 18),
-              ),
+              child: const Text('Tap Me', style: TextStyle(fontSize: 18)),
             ).inkWellManager(() {
               context.showSnackBar("Widget tapped!");
             }).onTap(),
