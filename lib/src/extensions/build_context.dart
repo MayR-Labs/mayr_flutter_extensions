@@ -160,33 +160,33 @@ extension MayrContextPlatformExtensions on BuildContext {
   bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;
 
   /// Check if the platform is Web
-  bool get isWeb => Theme.of(this).platform == TargetPlatform.fuchsia ||
-      Theme.of(this).platform == TargetPlatform.linux ||
-      Theme.of(this).platform == TargetPlatform.macOS ||
-      Theme.of(this).platform == TargetPlatform.windows;
+  bool get isWeb => kIsWeb;
 }
 
 extension MayrContextDialogExtensions on BuildContext {
-  /// Show a custom dialog.
+  /// Show a custom dialog using Material showDialog.
   ///
   /// Example:
   /// ```dart
   /// context.showCustomDialog(AlertDialog(title: Text('Hello')));
   /// ```
-  Future<T?> showCustomDialog<T>(Widget dialog) => showDialog<T>(
-    context: this,
-    builder: (_) => dialog,
-  );
+  Future<T?> showCustomDialog<T>(Widget dialog) {
+    return showDialog<T>(
+      context: this,
+      builder: (_) => dialog,
+    );
+  }
 
   /// Show a modal bottom sheet.
   ///
   /// Example:
   /// ```dart
-  /// context.showModalBottomSheet(Container(child: Text('Sheet')));
+  /// context.showSheet(Container(child: Text('Sheet')));
   /// ```
-  Future<T?> showModalBottomSheet<T>(Widget content) =>
-      showModalBottomSheet<T>(
-        context: this,
-        builder: (_) => content,
-      );
+  Future<T?> showSheet<T>(Widget content) {
+    return showModalBottomSheet<T>(
+      context: this,
+      builder: (_) => content,
+    );
+  }
 }
