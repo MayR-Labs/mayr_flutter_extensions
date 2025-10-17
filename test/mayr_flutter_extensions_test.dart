@@ -49,8 +49,8 @@ void main() {
       final result = testWidget.showIf(false);
 
       expect(result, isA<SizedBox>());
-      expect((result as SizedBox).width, equals(0));
-      expect(result.height, equals(0));
+      expect((result as SizedBox).width, equals(0.0));
+      expect(result.height, equals(0.0));
     });
 
     testWidgets('hideIf hides widget when condition is true', (tester) async {
