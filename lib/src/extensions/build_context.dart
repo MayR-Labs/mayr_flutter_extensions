@@ -21,9 +21,8 @@ extension MayrContextNavigationExtensions on BuildContext {
   /// ```dart
   /// context.push(MyPage());
   /// ```
-  Future<T?> push<T>(Widget page) => Navigator.of(this).push<T>(
-    MaterialPageRoute(builder: (_) => page),
-  );
+  Future<T?> push<T>(Widget page) =>
+      Navigator.of(this).push<T>(MaterialPageRoute(builder: (_) => page));
 
   /// Pop the current page from the navigation stack.
   ///
@@ -40,10 +39,9 @@ extension MayrContextNavigationExtensions on BuildContext {
   /// ```dart
   /// context.pushReplacement(NewPage());
   /// ```
-  Future<T?> pushReplacement<T, TO>(Widget page) =>
-      Navigator.of(this).pushReplacement<T, TO>(
-        MaterialPageRoute(builder: (_) => page),
-      );
+  Future<T?> pushReplacement<T, TO>(Widget page) => Navigator.of(
+    this,
+  ).pushReplacement<T, TO>(MaterialPageRoute(builder: (_) => page));
 
   /// Push a named route.
   ///
@@ -171,10 +169,7 @@ extension MayrContextDialogExtensions on BuildContext {
   /// context.showCustomDialog(AlertDialog(title: Text('Hello')));
   /// ```
   Future<T?> showCustomDialog<T>(Widget dialog) {
-    return showDialog<T>(
-      context: this,
-      builder: (_) => dialog,
-    );
+    return showDialog<T>(context: this, builder: (_) => dialog);
   }
 
   /// Show a modal bottom sheet.
@@ -184,9 +179,6 @@ extension MayrContextDialogExtensions on BuildContext {
   /// context.showSheet(Container(child: Text('Sheet')));
   /// ```
   Future<T?> showSheet<T>(Widget content) {
-    return showModalBottomSheet<T>(
-      context: this,
-      builder: (_) => content,
-    );
+    return showModalBottomSheet<T>(context: this, builder: (_) => content);
   }
 }

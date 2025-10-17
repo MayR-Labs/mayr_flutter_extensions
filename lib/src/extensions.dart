@@ -5,7 +5,6 @@ import './extensions/utils/inkwell_manager.dart';
 
 part './extensions/build_context.dart';
 part './extensions/color.dart';
-part './extensions/duration.dart';
 part './extensions/edge_insets.dart';
 part './extensions/image_widget.dart';
 part './extensions/stateless_widget.dart';

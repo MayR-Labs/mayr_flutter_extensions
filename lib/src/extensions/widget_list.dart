@@ -44,11 +44,7 @@ extension MayrWidgetListExtensions on List<Widget> {
   Stack toStack({
     AlignmentGeometry alignment = AlignmentDirectional.topStart,
     StackFit fit = StackFit.loose,
-  }) => Stack(
-    alignment: alignment,
-    fit: fit,
-    children: this,
-  );
+  }) => Stack(alignment: alignment, fit: fit, children: this);
 
   /// Converts this list of widgets to a [Wrap].
   ///

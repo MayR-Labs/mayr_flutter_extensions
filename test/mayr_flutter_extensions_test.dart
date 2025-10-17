@@ -182,8 +182,10 @@ void main() {
 
     testWidgets('fractionallySizedBox wraps widget', (tester) async {
       const testWidget = Text('Test');
-      final fractionalWidget =
-          testWidget.fractionallySizedBox(widthFactor: 0.5, heightFactor: 0.8);
+      final fractionalWidget = testWidget.fractionallySizedBox(
+        widthFactor: 0.5,
+        heightFactor: 0.8,
+      );
 
       expect(fractionalWidget, isA<FractionallySizedBox>());
       expect(fractionalWidget.widthFactor, equals(0.5));
@@ -218,8 +220,9 @@ void main() {
   });
 
   group('New Widget Extensions - Layout', () {
-    testWidgets('scrollable wraps widget in SingleChildScrollView',
-        (tester) async {
+    testWidgets('scrollable wraps widget in SingleChildScrollView', (
+      tester,
+    ) async {
       const testWidget = Text('Test');
       final scrollableWidget = testWidget.scrollable();
 
@@ -271,13 +274,16 @@ void main() {
   });
 
   group('New Widget Extensions - Gesture', () {
-    testWidgets('gestureDetector wraps widget in GestureDetector',
-        (tester) async {
+    testWidgets('gestureDetector wraps widget in GestureDetector', (
+      tester,
+    ) async {
       bool tapped = false;
       const testWidget = Text('Test');
-      final gestureWidget = testWidget.gestureDetector(onTap: () {
-        tapped = true;
-      });
+      final gestureWidget = testWidget.gestureDetector(
+        onTap: () {
+          tapped = true;
+        },
+      );
 
       expect(gestureWidget, isA<GestureDetector>());
 
@@ -289,8 +295,10 @@ void main() {
 
     testWidgets('dismissible wraps widget in Dismissible', (tester) async {
       const testWidget = Text('Test');
-      final dismissibleWidget =
-          testWidget.dismissible(const Key('test'), direction: DismissDirection.endToStart);
+      final dismissibleWidget = testWidget.dismissible(
+        const Key('test'),
+        direction: DismissDirection.endToStart,
+      );
 
       expect(dismissibleWidget, isA<Dismissible>());
       expect(dismissibleWidget.key, equals(const Key('test')));
@@ -319,7 +327,9 @@ void main() {
   group('List<Widget> Extensions', () {
     test('toColumn converts list to Column', () {
       final widgets = [const Text('A'), const Text('B')];
-      final column = widgets.toColumn(mainAxisAlignment: MainAxisAlignment.center);
+      final column = widgets.toColumn(
+        mainAxisAlignment: MainAxisAlignment.center,
+      );
 
       expect(column, isA<Column>());
       expect(column.children.length, equals(2));
@@ -328,7 +338,9 @@ void main() {
 
     test('toRow converts list to Row', () {
       final widgets = [const Text('A'), const Text('B')];
-      final row = widgets.toRow(mainAxisAlignment: MainAxisAlignment.spaceEvenly);
+      final row = widgets.toRow(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      );
 
       expect(row, isA<Row>());
       expect(row.children.length, equals(2));
@@ -360,9 +372,10 @@ void main() {
   group('Color Extensions', () {
     test('withOpacity creates color with opacity', () {
       const color = Colors.blue;
-      final opaqueColor = color.withOpacity(0.5);
 
-      expect(opaqueColor.alpha, lessThan(color.alpha));
+      final opaqueColor = color.withValues(alpha: 0.5);
+
+      expect(opaqueColor.a, lessThan(color.a));
     });
 
     test('darken makes color darker', () {
@@ -404,19 +417,6 @@ void main() {
       expect(modified.top, equals(10));
       expect(modified.right, equals(10));
       expect(modified.bottom, equals(10));
-    });
-  });
-
-  group('Duration Extensions', () {
-    test('delay executes callback after duration', () async {
-      bool executed = false;
-      const duration = Duration(milliseconds: 100);
-
-      await duration.delay(() {
-        executed = true;
-      });
-
-      expect(executed, isTrue);
     });
   });
 

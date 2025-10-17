@@ -7,7 +7,12 @@ extension MayrColorExtensions on Color {
   /// ```dart
   /// Colors.blue.withOpacity(0.5);
   /// ```
-  Color withOpacity(double opacity) => Color.fromRGBO(red, green, blue, opacity);
+  Color withOpacity(double opacity) => Color.fromRGBO(
+    (r * 255.0).round() & 0xff,
+    (g * 255.0).round() & 0xff,
+    (b * 255.0).round() & 0xff,
+    opacity,
+  );
 
   /// Darken the color by a given amount (0.0 to 1.0).
   ///
@@ -31,7 +36,9 @@ extension MayrColorExtensions on Color {
   Color lighten([double amount = 0.1]) {
     assert(amount >= 0 && amount <= 1, 'Amount must be between 0 and 1');
     final hsl = HSLColor.fromColor(this);
-    final hslLight = hsl.withLightness((hsl.lightness + amount).clamp(0.0, 1.0));
+    final hslLight = hsl.withLightness(
+      (hsl.lightness + amount).clamp(0.0, 1.0),
+    );
     return hslLight.toColor();
   }
 }

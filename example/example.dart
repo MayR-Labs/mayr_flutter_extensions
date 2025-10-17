@@ -155,12 +155,14 @@ class ExampleScreen extends StatelessWidget {
             ),
             const SizedBox(height: 10),
 
-            const Text('Decorated Box').decorated(
-              const BoxDecoration(
-                color: Colors.lightBlue,
-                borderRadius: BorderRadius.all(Radius.circular(8)),
-              ),
-            ).paddingAll(16),
+            const Text('Decorated Box')
+                .decorated(
+                  const BoxDecoration(
+                    color: Colors.lightBlue,
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                  ),
+                )
+                .paddingAll(16),
 
             const SizedBox(height: 10),
 
@@ -168,11 +170,7 @@ class ExampleScreen extends StatelessWidget {
 
             const SizedBox(height: 10),
 
-            Container(
-              height: 100,
-              width: 100,
-              color: Colors.green,
-            ).clipOval(),
+            Container(height: 100, width: 100, color: Colors.green).clipOval(),
 
             const SizedBox(height: 20),
 
@@ -186,12 +184,13 @@ class ExampleScreen extends StatelessWidget {
             Container(
               height: 150,
               color: Colors.grey[300],
-              child: Column(
-                children: List.generate(
-                  20,
-                  (i) => Text('Scrollable Item $i'),
-                ),
-              ).scrollable(),
+              child:
+                  Column(
+                    children: List.generate(
+                      20,
+                      (i) => Text('Scrollable Item $i'),
+                    ),
+                  ).scrollable(),
             ),
 
             const SizedBox(height: 10),

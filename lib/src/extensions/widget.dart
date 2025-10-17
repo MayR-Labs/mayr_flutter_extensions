@@ -351,11 +351,7 @@ extension MayrWidgetGestureExtensions on Widget {
   GestureDetector gestureDetector({
     VoidCallback? onTap,
     VoidCallback? onDoubleTap,
-  }) => GestureDetector(
-    onTap: onTap,
-    onDoubleTap: onDoubleTap,
-    child: this,
-  );
+  }) => GestureDetector(onTap: onTap, onDoubleTap: onDoubleTap, child: this);
 
   /// Wraps this widget in a [Dismissible] widget.
   ///
@@ -366,9 +362,5 @@ extension MayrWidgetGestureExtensions on Widget {
   Dismissible dismissible(
     Key key, {
     DismissDirection direction = DismissDirection.horizontal,
-  }) => Dismissible(
-    key: key,
-    direction: direction,
-    child: this,
-  );
+  }) => Dismissible(key: key, direction: direction, child: this);
 }
