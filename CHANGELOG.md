@@ -5,9 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [1.0.0] - 2025-01-17
 
-### Added
+### 🎉 Initial Release
+
+This is the first release of **mayr_flutter_extensions** as a standalone Flutter-specific extension package, separated from the original `mayr_extensions` package.
+
+### Added - New Extensions
 
 #### 🎨 Widget Extensions - Positioning & Sizing
 - `positioned({top, bottom, left, right})` - Wraps widget in Positioned with custom positioning for Stack layouts
@@ -80,12 +84,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `all` - Get uniform padding value (if all sides are equal)
 - `copyWith({left, top, right, bottom})` - Create modified copy of EdgeInsets
 
-## [1.0.0] - 2025-01-17
-
-### 🎉 Initial Release
-
-This is the first release of **mayr_flutter_extensions** as a standalone Flutter-specific extension package, separated from the original `mayr_extensions` package.
-
 ### Package Philosophy
 
 This package is part of the **MayR Extensions** family:
@@ -155,7 +153,7 @@ If you were using the original `mayr_extensions` package:
    ```dart
    // For general Dart extensions
    import 'package:mayr_dart_extensions/mayr_dart_extensions.dart';
-   
+
    // For Flutter-specific extensions
    import 'package:mayr_flutter_extensions/mayr_flutter_extensions.dart';
    ```
