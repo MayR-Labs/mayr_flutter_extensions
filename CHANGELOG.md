@@ -5,93 +5,88 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.3.1]
+## [1.0.0] - 2025-01-17
 
-- Automated deployments
+### 🎉 Initial Release
 
-## [0.3.0] - 30th April, 2025
+This is the first release of **mayr_flutter_extensions** as a standalone Flutter-specific extension package, separated from the original `mayr_extensions` package.
 
-### Added
-- `context.platformInLightMode`
-- `dateTime.startOfDay()`
-- `MayrDateTimeFormats`: A collection of popular datetime formats
-- Slightly more tests and dartdocs
+### Package Philosophy
 
-### Changed
-- `dateTime.toFormat(...)` -> `dateTime.format(...)`
-- `dateTime.isYesterday()`, `dateTime.isToday()`, and `dateTime.isTomorrow()` are now getter properties:
-  - `dateTime.isYesterday`
-  - `dateTime.isToday`
-  - `dateTime.isTomorrow`
-- `dateTime.isInPast()` and `dateTime.isInFuture()` are also now getter properties:
-  - `dateTime.isInPast`
-  - `dateTime.isInFuture`
+This package is part of the **MayR Extensions** family:
+- **mayr_dart_extensions** - General Dart extensions (String, int, DateTime, Duration, List, Map, etc.)
+- **mayr_flutter_extensions** - Flutter-specific extensions (Widget, BuildContext, etc.)
 
-### Removed
-- `dateTime.toDateString(...)`
-- `dateTime.toDateStringUK(...)`
-- `dateTime.toDateStringUS(...)`
-- `dateTime.toDateTimeString(...)`
-- `dateTime.isExpired()`
+This separation ensures:
+- Pure Dart projects can use general extensions without Flutter dependencies
+- Flutter projects can use both packages together for complete functionality
+- No code duplication between packages
+- Cleaner, more focused codebases
 
-## [0.2.0] - [29-04-2025]
+### Features
 
-### Added
-- `T?.orDefault(T fallback)` Added
-- `String.copyToClipboard()` Added
-- `String.toUri()` Added
-- More dartdocs to properties and methods
+#### 🧱 BuildContext Extensions
+- **Navigation & State Access**: `navigator`, `scaffold`, `form`, `overlay`, `scaffoldMessenger`
+- **SnackBar Helper**: `showSnackBar()` for quick snackbar display
+- **Media Query**: `mediaQuery`, `widgetSize`, `widgetWidth`, `widgetHeight`, `widgetShortestSide`
+- **Theme & Brightness**: `platformBrightness`, `platformInDarkMode`, `platformInLightMode`
+- **Device Detection**: `orientation`, `isPortrait`, `isLandscape`, `isPhone`, `isSmallTablet`, `isLargeTablet`, `isTablet`, `isDesktop`
 
-### Changed
-- `String.toDateTime()` now uses tryParse, so null is returned if parse fails and error is not thrown
-- Added namespaces to extensions to prevent clash with user extensions
+#### 🎨 Widget Extensions
+- **Basic Transformations**: `center()`, `expanded()`, `flexible()`, `opacity()`, `sizedBox()`, `constrained()`
+- **Padding**: `paddingAll()`, `paddingSymmetric()`, `paddingOnly()`, `paddingZero()`
+- **Clipping**: `clipRect()`, `clipRRect()`, `clipRounded()`
+- **Positioning**: `positionAlign()`, `positionedFill()`
+- **Visibility Helpers**: `showIf()`, `hideIf()`, `showUnless()`, `hideUnless()`
 
+#### 🔘 Tap Interactions
+- **InkWellManager**: Helper class for cleaner tap handling
+  - `inkWellManager()` - Setup tap handler
+  - `onTap()` - Single tap
+  - `onDoubleTap()` - Double tap
+  - `onLongPress()` - Long press
 
-## [0.1.1] - Minor cleanups
+#### 🖼️ Image Extensions
+- `circleAvatar()` - Convert Image to CircleAvatar with customization options
 
-### Changed
-- Removed certain files that are not required to use package from pub
+### Changed from Original Package
 
+#### Removed (Now in mayr_dart_extensions)
+- Bool extensions (choose, toInt, toYesNo, not)
+- String extensions (camelCase, snakeCase, mask, isEmail, etc.)
+- Number extensions (clampMin, clampMax, formatAsCurrency, etc.)
+- DateTime extensions (addDays, format, toAge, etc.)
+- Duration extensions (delay, toReadableString, etc.)
+- List/Iterable extensions (firstOrNull, chunked, mapIndexed, etc.)
+- Map extensions (getOrNull, mapKeys, merge, etc.)
+- Set extensions (toggle, intersects, isSubsetOf, etc.)
+- Object extensions (let, also)
+- Dynamic extensions (nullOnDebug, maybe, orDefault)
+- Humanize extensions (humanizeNumber, humanizeOrdinal, etc.)
+- MayrDateTimeFormats utility class
 
-## [0.1.0] - Rebrand to mayr_*
+### Migration Guide
 
-### Changed
-- Package name was rebranded from `flutter_util_extensions` to `mayr_extensions`
+If you were using the original `mayr_extensions` package:
 
+1. **Install both packages**:
+   ```yaml
+   dependencies:
+     mayr_dart_extensions: ^1.0.0
+     mayr_flutter_extensions: ^1.0.0
+   ```
 
-## [0.0.2]
+2. **Update imports**:
+   ```dart
+   // For general Dart extensions
+   import 'package:mayr_dart_extensions/mayr_dart_extensions.dart';
+   
+   // For Flutter-specific extensions
+   import 'package:mayr_flutter_extensions/mayr_flutter_extensions.dart';
+   ```
 
-### Changed
-- Relaxed `intl` dependency constraint to `>=0.19.0 <0.21.0` for wider compatibility.
-
-
-## [0.0.1] - Initial Release
-
-### Added
-- BuildContext extensions:
-  - Access to form, navigator, overlay, scaffold, media query, brightness, platform checks, and widget size.
-  - Device type checks (phone, tablet, desktop).
-  - Added `showSnackBar()` utility method.
-- DateTime extensions:
-  - Checkers for time of day, expiry, and comparisons.
-  - Manipulators to add/subtract dates, months, years, etc.
-  - Conversions to various string formats and age calculation.
-- Duration extension:
-  - `delay()` method for simple async delays.
-- Dynamic extensions:
-  - `nullOnDebug()`, `onlyOnDebug()`, and `maybe()` based on probability.
-- Image extension:
-  - Easily create a `CircleAvatar` widget with an image.
-- Number extensions:
-  - Comparison helpers, random number generators, number formatters, and conversions to Duration.
-- String extensions:
-  - Pattern matching, parsing to different cases (camelCase, snakeCase, etc.), and pretty printing (JSON, YAML, XML).
-  - Pattern checkers for emails, URLs, IP addresses, and more.
-- Widget extensions:
-  - Helpers for padding, sizing, positioning, clipping, visibility, and touch management via `InkWellManager`.
-
-### Notes
-- First public release.
-- Still evolving — contributions and feedback welcome!
+3. **No code changes needed** - All extensions work the same way, they're just in different packages now!
 
 ---
+
+For older versions, see the history of the original `mayr_extensions` package.

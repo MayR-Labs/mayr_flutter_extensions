@@ -7,10 +7,10 @@ extension MayrBuildContextExtensions on BuildContext {
   /// Get the nearest [ScaffoldState] up the widget tree
   ScaffoldState get scaffold => Scaffold.of(this);
 
-  /// Get the nearerst [FormState] up the widget tree
+  /// Get the nearest [FormState] up the widget tree
   FormState get form => Form.of(this);
 
-  /// Get the nearerst [OverlayState] up the widget tree
+  /// Get the nearest [OverlayState] up the widget tree
   OverlayState get overlay => Overlay.of(this);
 }
 
@@ -26,7 +26,7 @@ extension MayrContextScaffoldMessengerExtensions on BuildContext {
   }) => scaffoldMessenger.showSnackBar(
     SnackBar(
       content: Text(content),
-      duration: duration ?? 4.seconds,
+      duration: duration ?? const Duration(seconds: 4),
       behavior: behavior,
     ),
   );

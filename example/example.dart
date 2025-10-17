@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mayr_extensions/mayr_extensions.dart';
+import 'package:mayr_flutter_extensions/mayr_flutter_extensions.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,70 +19,122 @@ class ExampleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final now = DateTime.now();
-
     return Scaffold(
-      appBar: AppBar(title: const Text('Extensions Demo')),
+      appBar: AppBar(title: const Text('Flutter Extensions Demo')),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             /// BuildContext Extensions
-            Text('MediaQuery width: ${context.widgetWidth}'),
-            Text('Is dark mode: ${context.platformInDarkMode}'),
-
-            const SizedBox(height: 20),
-
-            /// String Extensions
-            Text('Camel Case: ${"hello world".camelCase}'), // helloWorld
-            Text('Snake Case: ${"hello world".snakeCase}'), // hello_world
-            Text('Mask: ${"08012345678".mask()}'), // 08********8
-            Text('Is Email: ${"test@example.com".isEmail}'), // true
-
-            const SizedBox(height: 20),
-
-            /// Number Extensions
-            Text('Clamp Min: ${5.clampMin(10)}'), // 10
-            Text('Clamp Max: ${20.clampMax(15)}'), // 15
-            Text('Days to Duration: ${3.days.inHours} hours'), // 72 hours
-
-            const SizedBox(height: 20),
-
-            /// DateTime Extensions
-            Text('Is Today: ${now.isToday}'), // true
-            Text('Is Morning: ${now.isMorning}'), // true/false
-            Text(
-              'Add 5 days: ${now.addDays(5).format(MayrDateTimeFormats.usDate)}',
-            ), // formatted future date
-
-            const SizedBox(height: 20),
-
-            /// Duration Extensions
-            ElevatedButton(
-              onPressed: () {
-                2.seconds.delay(() {
-                  context.showSnackBar("Delayed by 2secs");
-                });
-              },
-              child: const Text('Delay Example'),
+            const Text(
+              'BuildContext Extensions',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 10),
+            Text('MediaQuery width: ${context.widgetWidth}'),
+            Text('MediaQuery height: ${context.widgetHeight}'),
+            Text('Is dark mode: ${context.platformInDarkMode}'),
+            Text('Is light mode: ${context.platformInLightMode}'),
+            Text('Is portrait: ${context.isPortrait}'),
+            Text('Is landscape: ${context.isLandscape}'),
+            Text('Is phone: ${context.isPhone}'),
+            Text('Is tablet: ${context.isTablet}'),
 
             const SizedBox(height: 20),
 
             /// Widget Extensions
+            const Text(
+              'Widget Extensions',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+
+            // Padding example
             Container(
               height: 100,
               width: 100,
               color: Colors.blue,
-            ).paddingAll(8).opacity(0.8).center(),
+            ).paddingAll(8).opacity(0.5).center(),
+
+            const SizedBox(height: 10),
+
+            // Expanded example
+            Row(
+              children: [
+                Container(
+                  height: 50,
+                  color: Colors.red,
+                ).expanded(2),
+                Container(
+                  height: 50,
+                  color: Colors.green,
+                ).expanded(1),
+              ],
+            ),
 
             const SizedBox(height: 20),
 
             /// InkWellManager Example
-            Text('Tap Me', style: TextStyle(fontSize: 18)).inkWellManager(() {
-              context.showSnackBar("I have been tapped");
-            }, color: Colors.redAccent).onTap(),
+            const Text(
+              'Tap Interactions',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+
+            Container(
+              padding: const EdgeInsets.all(16),
+              color: Colors.amber,
+              child: const Text(
+                'Tap Me',
+                style: TextStyle(fontSize: 18),
+              ),
+            ).inkWellManager(() {
+              context.showSnackBar("Widget tapped!");
+            }).onTap(),
+
+            const SizedBox(height: 10),
+
+            Container(
+              padding: const EdgeInsets.all(16),
+              color: Colors.lightGreen,
+              child: const Text(
+                'Long Press Me',
+                style: TextStyle(fontSize: 18),
+              ),
+            ).inkWellManager(() {
+              context.showSnackBar("Widget long pressed!");
+            }, color: Colors.green).onLongPress(),
+
+            const SizedBox(height: 20),
+
+            /// Visibility Extensions
+            const Text(
+              'Visibility Extensions',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+
+            const Text('This is visible').showIf(true),
+            const Text('This is hidden').hideIf(true),
+            const Text('Show unless false').showUnless(false),
+
+            const SizedBox(height: 20),
+
+            /// Clipping Extensions
+            const Text(
+              'Clipping Extensions',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 10),
+
+            Container(
+              height: 80,
+              width: 200,
+              color: Colors.purple,
+            ).clipRounded(16),
+
+            const SizedBox(height: 20),
           ],
         ),
       ),
