@@ -75,6 +75,30 @@ extension MayrWidgetExtensions on Widget {
     ),
     child: this,
   );
+
+  /// Wraps this widget in an [AspectRatio] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Container().aspectRatio(16 / 9);
+  /// ```
+  AspectRatio aspectRatio(double ratio) =>
+      AspectRatio(aspectRatio: ratio, child: this);
+
+  /// Wraps this widget in a [FractionallySizedBox] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Container().fractionallySizedBox(widthFactor: 0.5, heightFactor: 0.8);
+  /// ```
+  FractionallySizedBox fractionallySizedBox({
+    double? widthFactor,
+    double? heightFactor,
+  }) => FractionallySizedBox(
+    widthFactor: widthFactor,
+    heightFactor: heightFactor,
+    child: this,
+  );
 }
 
 extension MayrWidgetClipExtensions on Widget {
@@ -103,6 +127,34 @@ extension MayrWidgetClipExtensions on Widget {
   /// ```
   ClipRRect clipRounded([double radius = 12]) =>
       clipRRect(BorderRadius.circular(radius));
+
+  /// Wraps this widget in a [ClipOval] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Image.network('url').clipOval();
+  /// ```
+  ClipOval clipOval() => ClipOval(child: this);
+}
+
+extension MayrWidgetStylingExtensions on Widget {
+  /// Wraps this widget in a [DecoratedBox] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').decorated(BoxDecoration(color: Colors.blue));
+  /// ```
+  DecoratedBox decorated(BoxDecoration decoration) =>
+      DecoratedBox(decoration: decoration, child: this);
+
+  /// Wraps this widget in a [Card] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').card(elevation: 4.0);
+  /// ```
+  Card card({double? elevation, ShapeBorder? shape}) =>
+      Card(elevation: elevation, shape: shape, child: this);
 }
 
 extension MayrWidgetPaddingExtensions on Widget {
@@ -177,6 +229,25 @@ extension MayrWidgetPositionExtensions on Widget {
   /// Container().positionedFill();
   /// ```
   Positioned positionedFill() => Positioned.fill(child: this);
+
+  /// Wraps this widget in a [Positioned] widget with optional positioning.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').positioned(top: 10, left: 20);
+  /// ```
+  Positioned positioned({
+    double? top,
+    double? bottom,
+    double? left,
+    double? right,
+  }) => Positioned(
+    top: top,
+    bottom: bottom,
+    left: left,
+    right: right,
+    child: this,
+  );
 }
 
 extension MayrWidgetVisibilityExtensions on Widget {
@@ -211,4 +282,85 @@ extension MayrWidgetVisibilityExtensions on Widget {
   /// Text('Hello').showUnless(isHidden);
   /// ```
   Widget showUnless(bool condition) => showIf(!condition);
+}
+
+extension MayrWidgetLayoutExtensions on Widget {
+  /// Wraps this widget in a [SingleChildScrollView] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Column(children: [...]).scrollable();
+  /// ```
+  SingleChildScrollView scrollable({Axis direction = Axis.vertical}) =>
+      SingleChildScrollView(scrollDirection: direction, child: this);
+
+  /// Wraps this widget in a [SafeArea] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').safeArea(top: true, bottom: true);
+  /// ```
+  SafeArea safeArea({bool top = true, bool bottom = true}) =>
+      SafeArea(top: top, bottom: bottom, child: this);
+
+  /// Wraps this widget in a [FittedBox] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Image.network('url').fittedBox(fit: BoxFit.cover);
+  /// ```
+  FittedBox fittedBox({BoxFit fit = BoxFit.contain}) =>
+      FittedBox(fit: fit, child: this);
+}
+
+extension MayrWidgetEffectsExtensions on Widget {
+  /// Wraps this widget in a [Hero] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Image.network('url').hero('imageHero');
+  /// ```
+  Hero hero(String tag) => Hero(tag: tag, child: this);
+
+  /// Wraps this widget in a [RotatedBox] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').rotated(1); // Rotates 90 degrees
+  /// ```
+  RotatedBox rotated(int quarterTurns) =>
+      RotatedBox(quarterTurns: quarterTurns, child: this);
+
+  /// Wraps this widget in a [Transform] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Hello').transform(Matrix4.rotationZ(0.5));
+  /// ```
+  Transform transform(Matrix4 transform) =>
+      Transform(transform: transform, child: this);
+}
+
+extension MayrWidgetGestureExtensions on Widget {
+  /// Wraps this widget in a [GestureDetector] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Tap me').gestureDetector(onTap: () => print('Tapped!'));
+  /// ```
+  GestureDetector gestureDetector({
+    VoidCallback? onTap,
+    VoidCallback? onDoubleTap,
+  }) => GestureDetector(onTap: onTap, onDoubleTap: onDoubleTap, child: this);
+
+  /// Wraps this widget in a [Dismissible] widget.
+  ///
+  /// Example:
+  /// ```dart
+  /// Text('Swipe me').dismissible(key: Key('item1'));
+  /// ```
+  Dismissible dismissible(
+    Key key, {
+    DismissDirection direction = DismissDirection.horizontal,
+  }) => Dismissible(key: key, direction: direction, child: this);
 }

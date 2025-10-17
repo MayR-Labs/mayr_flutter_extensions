@@ -14,6 +14,62 @@ extension MayrBuildContextExtensions on BuildContext {
   OverlayState get overlay => Overlay.of(this);
 }
 
+extension MayrContextNavigationExtensions on BuildContext {
+  /// Push a new page onto the navigation stack.
+  ///
+  /// Example:
+  /// ```dart
+  /// context.push(MyPage());
+  /// ```
+  Future<T?> push<T>(Widget page) =>
+      Navigator.of(this).push<T>(MaterialPageRoute(builder: (_) => page));
+
+  /// Pop the current page from the navigation stack.
+  ///
+  /// Example:
+  /// ```dart
+  /// context.pop();
+  /// context.pop('result'); // Pass result back
+  /// ```
+  void pop<T>([T? result]) => Navigator.of(this).pop(result);
+
+  /// Replace the current page with a new one.
+  ///
+  /// Example:
+  /// ```dart
+  /// context.pushReplacement(NewPage());
+  /// ```
+  Future<T?> pushReplacement<T, TO>(Widget page) => Navigator.of(
+    this,
+  ).pushReplacement<T, TO>(MaterialPageRoute(builder: (_) => page));
+
+  /// Push a named route.
+  ///
+  /// Example:
+  /// ```dart
+  /// context.pushNamed('/home');
+  /// ```
+  Future<T?> pushNamed<T>(String route, {Object? arguments}) =>
+      Navigator.of(this).pushNamed<T>(route, arguments: arguments);
+}
+
+extension MayrContextThemeExtensions on BuildContext {
+  /// Get the current theme.
+  ThemeData get theme => Theme.of(this);
+
+  /// Get the primary color from the theme.
+  Color get primaryColor => theme.primaryColor;
+
+  /// Get the color scheme from the theme.
+  ColorScheme get colorScheme => theme.colorScheme;
+
+  /// Get the text theme from the theme.
+  TextTheme get textTheme => theme.textTheme;
+
+  /// Check if the current theme is in dark mode.
+  bool get isDarkMode => theme.brightness == Brightness.dark;
+}
+
 extension MayrContextScaffoldMessengerExtensions on BuildContext {
   /// Get the nearest scaffold messenger
   ScaffoldMessengerState get scaffoldMessenger => ScaffoldMessenger.of(this);
@@ -42,6 +98,21 @@ extension MayrContextMediaQueryExtensions on BuildContext {
   double get widgetWidth => widgetSize.width;
 
   double get widgetHeight => widgetSize.height;
+
+  /// Get screen width (alias for widgetWidth for clarity)
+  double get screenWidth => widgetWidth;
+
+  /// Get screen height (alias for widgetHeight for clarity)
+  double get screenHeight => widgetHeight;
+
+  /// Get padding (safe area insets)
+  EdgeInsets get padding => mediaQuery.padding;
+
+  /// Get view insets (keyboard, etc.)
+  EdgeInsets get viewInsets => mediaQuery.viewInsets;
+
+  /// Get device pixel ratio
+  double get devicePixelRatio => mediaQuery.devicePixelRatio;
 
   // Brightness
 
@@ -77,4 +148,37 @@ extension MayrContextMediaQueryOrientationExtensions on BuildContext {
 
   /// True if current device is Desktop
   bool get isDesktop => widgetShortestSide >= 1200;
+}
+
+extension MayrContextPlatformExtensions on BuildContext {
+  /// Check if the platform is iOS
+  bool get isIOS => Theme.of(this).platform == TargetPlatform.iOS;
+
+  /// Check if the platform is Android
+  bool get isAndroid => Theme.of(this).platform == TargetPlatform.android;
+
+  /// Check if the platform is Web
+  bool get isWeb => kIsWeb;
+}
+
+extension MayrContextDialogExtensions on BuildContext {
+  /// Show a custom dialog using Material showDialog.
+  ///
+  /// Example:
+  /// ```dart
+  /// context.showCustomDialog(AlertDialog(title: Text('Hello')));
+  /// ```
+  Future<T?> showCustomDialog<T>(Widget dialog) {
+    return showDialog<T>(context: this, builder: (_) => dialog);
+  }
+
+  /// Show a modal bottom sheet.
+  ///
+  /// Example:
+  /// ```dart
+  /// context.showSheet(Container(child: Text('Sheet')));
+  /// ```
+  Future<T?> showSheet<T>(Widget content) {
+    return showModalBottomSheet<T>(context: this, builder: (_) => content);
+  }
 }
